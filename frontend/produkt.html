@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detail produktu | P&amp;P 3D-Print</title>
+<link href="style.css" rel="stylesheet"/>
+<meta content="P&amp;P 3D-Print. Promyšlené doplňky, originální modely a 3D tisk na míru. Vaše nápady, vrstvu po vrstvě." name="description"/></head>
+<body>
+<header>
+<div class="container nav-wrapper">
+<a class="logo" href="index.html"><svg aria-hidden="true" viewbox="0 0 32 36"><path d="M2 9L16 2l14 7-14 7z" fill="#a0d7b8"></path><path d="M2 9v17l14 8V16z" fill="#609a7a"></path><path d="M16 16l14-7v17l-14 8z" fill="#347254"></path><path d="M2 15l14 8 14-8M2 21l14 8 14-8" fill="none" stroke="white" stroke-opacity=".7"></path></svg><span>P&amp;P <b>3D-Print</b></span></a>
+<button aria-controls="main-nav" aria-expanded="false" aria-label="Otevřít navigaci" class="menu-toggle">Menu</button><nav aria-label="Hlavní navigace" id="main-nav">
+<ul>
+<li><a href="index.html">Domů</a></li>
+<li><a href="eshop.html">Katalog</a></li>
+<li><a href="index.html#zakazka">Tisk na zakázku</a></li>
+<li><a href="#kontakt">Kontakt</a></li>
+</ul>
+</nav>
+<button aria-label="Otevřít košík" class="cart-btn" id="open-cart-btn" tabindex="0">Košík (<span id="cart-count">0</span>)</button>
+</div>
+</header><main><section class="container section-padding">
+<div class="breadcrumbs" id="breadcrumbs" style="display: none;">
+<a href="index.html">Hlavní stránka</a> » <a href="eshop.html">Katalog</a> » <span id="bc-product-name">...</span>
+</div>
+<div class="detail-wrapper" id="product-detail-container">
+<p style="text-align: center; color: var(--text-muted);">Načítání detailu produktu...</p>
+</div>
+</section></main>
+<footer id="kontakt"><div class="container footer-top"><div><a class="logo" href="index.html"><svg aria-hidden="true" viewbox="0 0 32 36"><path d="M2 9L16 2l14 7-14 7z" fill="#a0d7b8"></path><path d="M2 9v17l14 8V16z" fill="#609a7a"></path><path d="M16 16l14-7v17l-14 8z" fill="#347254"></path><path d="M2 15l14 8 14-8M2 21l14 8 14-8" fill="none" stroke="white" stroke-opacity=".7"></path></svg><span>P&amp;P <b>3D-Print</b></span></a><p>Velké nápady. Dokonalé malé detaily.</p></div><div><h3>Objevujte</h3><a href="eshop.html">Kolekce produktů</a><a href="index.html#zakazka">Tisk na míru</a></div><div><h3>Pojďme něco vytvořit.</h3><p>Začněte nezávaznou poptávkou.</p><a href="index.html#zakazka">Váš nápad začíná tady ↗</a></div></div><div class="container footer-bottom"><span>© 2026 P&amp;P 3D-Print</span><span>Navrženo s citem. Vytištěno ve 3D.</span><a href="soukromi.html">Zpracování údajů</a></div></footer>
+<div aria-label="Váš košík" aria-modal="true" class="cart-sidebar" id="cart-sidebar" inert="" role="dialog">
+<div class="cart-header">
+<h2>Váš košík</h2>
+<button aria-label="Zavřít košík" class="close-btn" id="close-cart">×</button>
+</div>
+<div class="cart-items" id="cart-items"></div>
+<div class="cart-footer">
+<div class="cart-total">
+<span>Cena bez DPH:</span>
+<span id="cart-total-no-vat">0 Kč</span>
+</div>
+<div class="cart-total final">
+<span>Celkem (vč. 21% DPH):</span>
+<span id="cart-total-price">0 Kč</span>
+</div>
+<button class="btn btn-primary btn-block" id="checkout-btn">Pokračovat k poptávce</button>
+</div>
+</div>
+<div class="cart-overlay" id="cart-overlay"></div>
+<div aria-live="polite" class="toast-container" id="toast-container" role="status"></div>
+<div id="custom-chat-widget">
+<button class="chat-toggle-btn" id="chat-toggle-btn">
+<span style="font-size: 1.2rem;">💬</span> Potřebujete poradit?
+        </button>
+<div class="chat-window" id="chat-window">
+<div class="chat-header">
+<div><h4 style="margin:0">P&amp;P 3D-Print Podpora</h4><small style="color: #888;">Průvodce 3D tiskem</small></div>
+<button aria-label="Zavřít průvodce" class="close-chat-btn" id="close-chat-btn">×</button>
+</div>
+<div class="chat-messages" id="chat-messages">
+<div class="chat-msg bot-msg">Dobrý den. Jsem automatický průvodce. Poradím s materiály nebo vás nasměruji k tisku na míru.</div>
+</div>
+<div class="chat-input-area">
+<input id="chat-input" placeholder="Napište zprávu..." type="text"/>
+<button aria-label="Odeslat zprávu" id="chat-send-btn">➤</button>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

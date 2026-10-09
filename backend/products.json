@@ -1,0 +1,65 @@
+[
+  {
+    "id": "p1",
+    "name": "Artikulovaný drak",
+    "priceNoVat": 412,
+    "price_cents": 49900,
+    "desc": "Plně ohebná, detailně propracovaná figurka draka vytištěná na moderní 3D tiskárně. Skvělý jako antistresová hračka nebo jedinečná dekorace na pracovní stůl.",
+    "colors": [
+      "Neonově Zelená",
+      "Matná Černá",
+      "Ohnivá Červená",
+      "Duhová (Rainbow)"
+    ],
+    "materials": [
+      "PLA (Ekologický plast)"
+    ]
+  },
+  {
+    "id": "p2",
+    "name": "Stojánek na ovladač",
+    "priceNoVat": 247,
+    "price_cents": 29900,
+    "desc": "Univerzální, robustní stojánek navržený pro herní ovladače Xbox Series, PlayStation 5 nebo Nintendo Switch. Udržujte svůj herní koutek perfektně organizovaný.",
+    "colors": [
+      "Matná Černá",
+      "Polární Bílá",
+      "Stříbrná"
+    ],
+    "materials": [
+      "PLA (Základní)",
+      "PETG (Zvýšená odolnost)"
+    ]
+  },
+  {
+    "id": "p3",
+    "name": "Květináč Groot",
+    "priceNoVat": 289,
+    "price_cents": 35000,
+    "desc": "Stylový květináč inspirovaný populární filmovou postavou. Ideální pro malé sukulenty, kaktusy, nebo může posloužit jako originální stojan na tužky.",
+    "colors": [
+      "Dřevěná Hnědá",
+      "Mramorová (Marble)",
+      "Kamenná Šedá"
+    ],
+    "materials": [
+      "PLA (Ekologický plast)"
+    ]
+  },
+  {
+    "id": "p4",
+    "name": "Stojánek na sluchátka",
+    "priceNoVat": 190,
+    "price_cents": 23000,
+    "desc": "Elegantní stojan s minimalistickým designem, který bezpečně udrží jakákoliv náhlavní sluchátka. Konstrukce zamezuje deformaci hlavového mostu.",
+    "colors": [
+      "Matná Černá",
+      "Polární Bílá",
+      "Kybernetická Zelená"
+    ],
+    "materials": [
+      "PETG (Zvýšená odolnost)",
+      "ABS (Technický plast)"
+    ]
+  }
+]
