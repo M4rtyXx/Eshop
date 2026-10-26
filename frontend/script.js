@@ -53,7 +53,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     let backendReady = false;
     try {
-        const {products} = await api('/api/products');
+        const response = await fetch('/api/products', {signal: AbortSignal.timeout(5000)});
+        if (!response.ok) throw new Error('Catalog unavailable');
+        const {products} = await response.json();
         products.forEach(product => { if(productsDatabase[product.id]) Object.assign(productsDatabase[product.id], product); });
         backendReady = true;
     } catch {
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         banner.textContent = 'Objednávkový systém je momentálně nedostupný. Zkuste stránku obnovit později.';
         document.querySelector('main').prepend(banner);
     }
+
     function submissionKey(form, body) {
         const signature = typeof body === 'string' ? body : JSON.stringify(body);
         if (form.dataset.signature !== signature) { form.dataset.signature = signature; form.dataset.requestKey = crypto.randomUUID(); }
@@ -119,6 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <select id="product-material">${materialOptions}</select>
                     </div>
 
+                    <label class="quantity-label" for="product-quantity">Počet kusů</label><input id="product-quantity" type="number" min="1" max="50" step="1" value="1" required>
                     <button class="btn btn-primary btn-block" id="add-to-cart-detail" style="margin-top: 30px; padding: 15px;">
                         Přidat do košíku  →
                     </button>
@@ -128,8 +132,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('add-to-cart-detail').addEventListener('click', () => {
                 const selectedColor = document.getElementById('product-color').value;
                 const selectedMaterial = document.getElementById('product-material').value;
-                window.addVariantToCart(productId, product.name, product.priceNoVat, product.image, selectedColor, selectedMaterial);
-                window.showToast(`${product.name} byl přidán do košíku.`);
+                const quantityInput = document.getElementById('product-quantity');
+                if (!quantityInput.reportValidity()) return;
+                if (window.addVariantToCart(productId, product.name, product.priceNoVat, product.image, selectedColor, selectedMaterial, Number(quantityInput.value))) {
+                    window.showToast(`${product.name} byl přidán do košíku.`);
+                    openCart();
+                }
             });
 
         } else {
@@ -162,10 +170,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 formPro.style.display = 'none';
                 formLaik.style.display = 'none';
                 
-                document.getElementById('pro-form').reset();
-                document.getElementById('laik-form').reset();
-                document.getElementById('pro-file-name').textContent = 'Klikněte pro výběr 3D modelů';
-                document.getElementById('laik-file-name').textContent = 'Nahrát fotky / nákres (Volitelné)';
+
+                document.getElementById('pro-file-name').textContent = [...document.getElementById('pro-upload').files].map(f => f.name).join(', ') || 'Klikněte pro výběr 3D modelů';
+                document.getElementById('laik-file-name').textContent = [...document.getElementById('laik-upload').files].map(f => f.name).join(', ') || 'Nahrát fotky / nákres (Volitelné)';
                 
                 document.querySelectorAll('.wizard-step').forEach(step => step.style.display = 'none');
                 document.getElementById('pro-step-1').style.display = 'block';
@@ -197,6 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 currentStep.style.display = 'none';
                 const nextStep = document.getElementById(nextStepId);
                 nextStep.style.display = 'block';
+                nextStep.querySelector('input,select,textarea,button')?.focus();
             }
         });
     });
@@ -268,7 +276,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const button=form.querySelector('button[type=submit]');button.disabled=true;button.textContent='Odesílám…';
         try {
             const result=await api('/api/enquiries',{method:'POST',headers:{'Idempotency-Key':submissionKey(form,signature)},body:data});
-            form.querySelector('.reset-funnel').click();delete form.dataset.signature;
+            form.reset();form.querySelector('.reset-funnel').click();delete form.dataset.signature;
             let receipt=document.getElementById('enquiry-receipt');
             if(!receipt){receipt=document.createElement('div');receipt.id='enquiry-receipt';receipt.className='receipt';receipt.setAttribute('role','status');document.getElementById('funnel-choices').before(receipt);}
             receipt.textContent='Poptávka '+result.id+' je uložená. Její číslo si prosím poznamenejte. Podklady nyní čekají na zpracování.';
@@ -409,10 +417,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <small style="font-size:0.7rem; color:#777;">Základ bez DPH: ${item.priceNoVat} Kč/ks</small>
                     </div>
                     <div class="item-controls">
-                        <button class="btn-minus" data-cart-id="${item.cartItemId}">-</button>
+                        <button aria-label="Odebrat jeden kus" class="btn-minus" data-cart-id="${item.cartItemId}">-</button>
                         <span>${item.quantity}</span>
-                        <button class="btn-plus" data-cart-id="${item.cartItemId}">+</button>
-                        <button class="btn-remove" data-cart-id="${item.cartItemId}">X</button>
+                        <button aria-label="Přidat jeden kus" class="btn-plus" data-cart-id="${item.cartItemId}">+</button>
+                        <button aria-label="Odstranit položku" class="btn-remove" data-cart-id="${item.cartItemId}">X</button>
                     </div>
                 `;
                 cartItemsContainer.appendChild(div);
@@ -421,22 +429,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const totalWithVat = cart.reduce((total,item)=>total+(productsDatabase[item.productId].price_cents != null ? productsDatabase[item.productId].price_cents / 100 : Math.round(item.priceNoVat*1.21))*item.quantity,0);
 
+        const checkoutButton = document.getElementById("checkout-btn");
+        if (checkoutButton) checkoutButton.disabled = !cart.length || !backendReady;
         if (cartCountEl) cartCountEl.textContent = count;
         if (cartTotalPriceEl) cartTotalPriceEl.textContent = `${totalWithVat} Kč`;
         if (cartTotalNoVatEl) cartTotalNoVatEl.textContent = `${totalNoVat} Kč`;
     }
 
-    window.addVariantToCart = function(productId, name, priceNoVat, image, color, material) {
+    window.addVariantToCart = function(productId, name, priceNoVat, image, color, material, quantity = 1) {
+        if (!Number.isInteger(quantity) || quantity < 1 || quantity > 50) return false;
         const cartItemId = `${productId}-${color.replace(/\s+/g, '')}-${material.replace(/\s+/g, '')}`;
         const existingItem = cart.find(i => i.cartItemId === cartItemId);
         
         if (existingItem) {
-            if(existingItem.quantity>=50){showToast('Maximálně 50 kusů jedné varianty.',true);return;} existingItem.quantity++;
+            if(existingItem.quantity + quantity > 50){showToast('Maximálně 50 kusů jedné varianty.',true);return false;} existingItem.quantity += quantity;
         } else {
-            cart.push({ cartItemId, productId, name, priceNoVat, image, color, material, quantity: 1 });
+            cart.push({ cartItemId, productId, name, priceNoVat, image, color, material, quantity });
         }
         
         updateCart();
+        return true;
     };
 
     if (cartItemsContainer) {
@@ -496,28 +508,45 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     renderCart(); 
 
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const productCards = document.querySelectorAll('.product-card');
-
-    if (filterBtns.length > 0 && productCards.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const filterValue = btn.getAttribute('data-filter');
-
-                productCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'flex'; 
-                    } else {
-                        card.style.display = 'none'; 
-                    }
-                });
+    const grid = document.getElementById('product-grid');
+    if (grid) {
+        const cards = [...grid.querySelectorAll('.product-card')];
+        const buttons = [...document.querySelectorAll('.filter-btn')];
+        const search = document.getElementById('catalog-search');
+        const sort = document.getElementById('catalog-sort');
+        const params = new URLSearchParams(location.search);
+        let category = buttons.some(b => b.dataset.filter === params.get('category')) ? params.get('category') : 'all';
+        search.value = params.get('q') || '';
+        if ([...sort.options].some(o => o.value === params.get('sort'))) sort.value = params.get('sort');
+        const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('cs');
+        function applyFilters() {
+            const query = normalize(search.value.trim());
+            let count = 0;
+            const getProduct = card => productsDatabase[card.querySelector('[data-product-id]').dataset.productId];
+            cards.forEach(card => {
+                const product = getProduct(card);
+                const haystack = normalize([product.name, product.desc, ...product.colors, ...product.materials].join(' '));
+                const visible = (category === 'all' || card.dataset.category === category) && haystack.includes(query);
+                card.hidden = !visible;
+                if (visible) count++;
             });
-        });
+            const price = card => getProduct(card).price_cents ?? Math.round(getProduct(card).priceNoVat * 1.21) * 100;
+            [...cards].sort((a, b) => sort.value === 'price-asc' ? price(a)-price(b) : sort.value === 'price-desc' ? price(b)-price(a) : sort.value === 'name' ? getProduct(a).name.localeCompare(getProduct(b).name, 'cs') : cards.indexOf(a)-cards.indexOf(b)).forEach(card => grid.append(card));
+            buttons.forEach(button => { const active = button.dataset.filter === category; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active)); });
+            document.getElementById('catalog-count').textContent = `Zobrazeno ${count} z ${cards.length} produktů`;
+            document.getElementById('catalog-empty').hidden = count !== 0;
+            const url = new URL(location.href);
+            for (const [key, value] of Object.entries({category: category === 'all' ? '' : category, q: search.value.trim(), sort: sort.value === 'default' ? '' : sort.value})) {
+                if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+            }
+            history.replaceState(null, '', url);
+        }
+        buttons.forEach(button => button.addEventListener('click', () => {category = button.dataset.filter; applyFilters();}));
+        search.addEventListener('input', applyFilters);
+        sort.addEventListener('change', applyFilters);
+        document.getElementById('catalog-reset').addEventListener('click', () => {category='all'; search.value=''; sort.value='default'; applyFilters(); search.focus();});
+        applyFilters();
     }
-
 
     const menu = document.querySelector('.menu-toggle');
     menu.addEventListener('click', () => {const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));document.querySelector('nav').classList.toggle('is-open',open);});
