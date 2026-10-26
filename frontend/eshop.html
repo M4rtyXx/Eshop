@@ -6,8 +6,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Kolekce | P&amp;P 3D-Print</title>
 <link href="style.css" rel="stylesheet"/>
+<link href="layout.css" rel="stylesheet"/>
 <meta content="P&amp;P 3D-Print. Promyšlené doplňky, originální modely a 3D tisk na míru. Vaše nápady, vrstvu po vrstvě." name="description"/></head>
-<body>
+<body><a class="skip-link" href="#main-content">Přejít k obsahu</a>
 <header>
 <div class="container nav-wrapper">
 <a class="logo" href="index.html"><svg aria-hidden="true" viewbox="0 0 32 36"><path d="M2 9L16 2l14 7-14 7z" fill="#a0d7b8"></path><path d="M2 9v17l14 8V16z" fill="#609a7a"></path><path d="M16 16l14-7v17l-14 8z" fill="#347254"></path><path d="M2 15l14 8 14-8M2 21l14 8 14-8" fill="none" stroke="white" stroke-opacity=".7"></path></svg><span>P&amp;P <b>3D-Print</b></span></a>
@@ -21,15 +22,15 @@
 </nav>
 <button aria-label="Otevřít košík" class="cart-btn" id="open-cart-btn" tabindex="0">Košík (<span id="cart-count">0</span>)</button>
 </div>
-</header><main><section class="container section-padding catalog-section">
-<div class="catalog-heading"><p class="eyebrow">P&amp;P COLLECTION</p><h1>Pro váš prostor.<br/><span>Pro vaši radost.</span></h1><p>Originální modely. Praktické doplňky. Nekonečno možností.</p></div>
-<div class="filters">
+</header><main id="main-content"><section class="container section-padding catalog-section">
+<div class="catalog-heading"><p class="eyebrow">P&amp;P COLLECTION</p><h1>Najděte svůj<br/><span>další kousek.</span></h1><p>Originální modely. Praktické doplňky. Nekonečno možností.</p></div>
+<div class="catalog-layout"><aside class="catalog-sidebar"><h2>Kategorie</h2><div class="filters">
 <button class="filter-btn active" data-filter="all">Všechno</button>
 <button class="filter-btn" data-filter="hracky">Hračky a figurky</button>
 <button class="filter-btn" data-filter="prislusenstvi">Příslušenství</button>
 <button class="filter-btn" data-filter="prakticke">Do domácnosti</button>
 </div>
-<div class="product-grid" id="product-grid">
+</aside><div class="catalog-results"><div class="catalog-toolbar"><label>Hledat produkt<input id="catalog-search" type="search" placeholder="Název, materiál nebo barva…" autocomplete="off"></label><label>Seřadit<select id="catalog-sort"><option value="default">Doporučené pořadí</option><option value="price-asc">Od nejlevnějšího</option><option value="price-desc">Od nejdražšího</option><option value="name">Podle názvu</option></select></label></div><p id="catalog-count" role="status" aria-live="polite"></p><div class="product-grid" id="product-grid">
 <div class="product-card" data-category="hracky">
 <div class="product-image"><a href="produkt.html?id=p1"><img alt="Artikulovaný drak – ilustrační vizualizace" loading="lazy" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNTQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2I5ZThjYyIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiM2ZWE5OGEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyNzVjNDgiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYiI+PHN0b3Agc3RvcC1jb2xvcj0iIzUwNWI1OSIvPjxzdG9wIG9mZnNldD0iLjU1IiBzdG9wLWNvbG9yPSIjMjIyYzI5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzg4NTdlIi8+PC9saW5lYXJHcmFkaWVudD48cGF0dGVybiBpZD0ibGluZXMiIHdpZHRoPSI1IiBoZWlnaHQ9IjUiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0wIDRoNSIgc3Ryb2tlPSIjMTczYzJjIiBzdHJva2Utb3BhY2l0eT0iLjE2Ii8+PC9wYXR0ZXJuPjxmaWx0ZXIgaWQ9ImJsdXIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjEzIi8+PC9maWx0ZXI+PC9kZWZzPjxlbGxpcHNlIGN4PSIzMjAiIGN5PSI0NDUiIHJ4PSIxNjYiIHJ5PSIyMiIgZmlsbD0iIzE4MmIyMCIgb3BhY2l0eT0iLjEyIiBmaWx0ZXI9InVybCgjYmx1cikiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNDAgMzMwLjApIHJvdGF0ZSgtMzUpIj48ZWxsaXBzZSByeD0iMzYiIHJ5PSI0NCIgZmlsbD0idXJsKCNnKSIvPjxwYXRoIGQ9Ik0tMjUgLTE4TDAgLTYyIDI1IC0xOCIgZmlsbD0iIzgwYjc5NyIvPjxlbGxpcHNlIHJ4PSIzNiIgcnk9IjQ0IiBmaWxsPSJ1cmwoI2xpbmVzKSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxODIgMjg3Ljc2NTE4ODI4MzI4MjQpIHJvdGF0ZSgtMjMpIj48ZWxsaXBzZSByeD0iMzYiIHJ5PSI0NCIgZmlsbD0idXJsKCNnKSIvPjxwYXRoIGQ9Ik0tMjUgLTE4TDAgLTYyIDI1IC0xOCIgZmlsbD0iIzgwYjc5NyIvPjxlbGxpcHNlIHJ4PSIzNiIgcnk9IjQ0IiBmaWxsPSJ1cmwoI2xpbmVzKSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMjQgMjU2LjY5NTY0MDY4NDMxNjIzKSByb3RhdGUoLTExKSI+PGVsbGlwc2Ugcng9IjM2IiByeT0iNDQiIGZpbGw9InVybCgjZykiLz48cGF0aCBkPSJNLTI1IC0xOEwwIC02MiAyNSAtMTgiIGZpbGw9IiM4MGI3OTciLz48ZWxsaXBzZSByeD0iMzYiIHJ5PSI0NCIgZmlsbD0idXJsKCNsaW5lcykiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjY2IDI0NS4wMDQ5NTM3ODA0NTI4Nykgcm90YXRlKDEpIj48ZWxsaXBzZSByeD0iMzYiIHJ5PSI0NCIgZmlsbD0idXJsKCNnKSIvPjxwYXRoIGQ9Ik0tMjUgLTE4TDAgLTYyIDI1IC0xOCIgZmlsbD0iIzgwYjc5NyIvPjxlbGxpcHNlIHJ4PSIzNiIgcnk9IjQ0IiBmaWxsPSJ1cmwoI2xpbmVzKSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMDggMjU1Ljc4MzY5Njc0MTg2MTEpIHJvdGF0ZSgxMykiPjxlbGxpcHNlIHJ4PSIzNiIgcnk9IjQ0IiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTS0yNSAtMThMMCAtNjIgMjUgLTE4IiBmaWxsPSIjODBiNzk3Ii8+PGVsbGlwc2Ugcng9IjM2IiByeT0iNDQiIGZpbGw9InVybCgjbGluZXMpIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM1MCAyODYuMTgyMzgzMzk1MTc1NSkgcm90YXRlKDI1KSI+PGVsbGlwc2Ugcng9IjM2IiByeT0iNDQiIGZpbGw9InVybCgjZykiLz48cGF0aCBkPSJNLTI1IC0xOEwwIC02MiAyNSAtMTgiIGZpbGw9IiM4MGI3OTciLz48ZWxsaXBzZSByeD0iMzYiIHJ5PSI0NCIgZmlsbD0idXJsKCNsaW5lcykiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzkyIDMyOC4xNjQ3NjcwNjMyODE4Mykgcm90YXRlKDM3KSI+PGVsbGlwc2Ugcng9IjM2IiByeT0iNDQiIGZpbGw9InVybCgjZykiLz48cGF0aCBkPSJNLTI1IC0xOEwwIC02MiAyNSAtMTgiIGZpbGw9IiM4MGI3OTciLz48ZWxsaXBzZSByeD0iMzYiIHJ5PSI0NCIgZmlsbD0idXJsKCNsaW5lcykiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDM0IDM3MC42MzIzMTU5MjE1MDQxMykgcm90YXRlKDQ5KSI+PGVsbGlwc2Ugcng9IjM2IiByeT0iNDQiIGZpbGw9InVybCgjZykiLz48cGF0aCBkPSJNLTI1IC0xOEwwIC02MiAyNSAtMTgiIGZpbGw9IiM4MGI3OTciLz48ZWxsaXBzZSByeD0iMzYiIHJ5PSI0NCIgZmlsbD0idXJsKCNsaW5lcykiLz48L2c+PHBhdGggZD0iTTQ0NyAyODdsNDgtNDMgNDMgMTkgMjMgNTUtMzAgMjctNTgtMTJ6IiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTTQ4MSAyNThsLTQtNDAgMjUgMjRNNTE4IDI1OGwxNS0zNyA4IDUyIiBmaWxsPSIjNDc3ODViIi8+PGNpcmNsZSBjeD0iNTIwIiBjeT0iMjg4IiByPSI2IiBmaWxsPSIjMTczYjJjIi8+PC9zdmc+"/></a></div>
 <div class="product-info"><span class="product-tag">P&amp;P COLLECTION</span>
@@ -55,15 +56,15 @@
 </div>
 </div>
 </div><p class="catalog-note">Produktové ilustrace jsou orientační. Barvu a materiál si zvolíte v detailu.</p>
-</section></main>
+<div id="catalog-empty" class="empty-results" hidden><h2>Nic jsme nenašli.</h2><p>Zkuste jiný výraz nebo zobrazte všechny produkty.</p><button id="catalog-reset" class="btn btn-outline">Zrušit filtry</button></div></div></div></section></main>
 <footer id="kontakt"><div class="container footer-top"><div><a class="logo" href="index.html"><svg aria-hidden="true" viewbox="0 0 32 36"><path d="M2 9L16 2l14 7-14 7z" fill="#a0d7b8"></path><path d="M2 9v17l14 8V16z" fill="#609a7a"></path><path d="M16 16l14-7v17l-14 8z" fill="#347254"></path><path d="M2 15l14 8 14-8M2 21l14 8 14-8" fill="none" stroke="white" stroke-opacity=".7"></path></svg><span>P&amp;P <b>3D-Print</b></span></a><p>Velké nápady. Dokonalé malé detaily.</p></div><div><h3>Objevujte</h3><a href="eshop.html">Kolekce produktů</a><a href="index.html#zakazka">Tisk na míru</a></div><div><h3>Pojďme něco vytvořit.</h3><p>Začněte nezávaznou poptávkou.</p><a href="index.html#zakazka">Váš nápad začíná tady ↗</a></div></div><div class="container footer-bottom"><span>© 2026 P&amp;P 3D-Print</span><span>Navrženo s citem. Vytištěno ve 3D.</span><a href="soukromi.html">Zpracování údajů</a></div></footer>
 <div aria-label="Váš košík" aria-modal="true" class="cart-sidebar" id="cart-sidebar" inert="" role="dialog">
 <div class="cart-header"><h2>Váš košík</h2><button aria-label="Zavřít košík" class="close-btn" id="close-cart">×</button></div>
 <div class="cart-items" id="cart-items"></div>
 <div class="cart-footer">
-<div class="cart-total"><span>Cena bez DPH:</span><span id="cart-total-no-vat">0 Kč</span></div>
+<div class="cart-total"><span>Produkty bez DPH:</span><span id="cart-total-no-vat">0 Kč</span></div>
 <div class="cart-total final"><span>Celkem vč. 21% DPH:</span><span id="cart-total-price">0 Kč</span></div>
-<button class="btn btn-primary btn-block" id="checkout-btn">Pokračovat k poptávce</button>
+<p class="cart-help">Nezávazná poptávka. Dopravu a platbu domluvíme po odeslání.</p><button class="btn btn-primary btn-block" id="checkout-btn">Pokračovat k poptávce</button>
 </div>
 </div>
 <div class="cart-overlay" id="cart-overlay"></div>
